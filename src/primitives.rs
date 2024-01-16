@@ -1,4 +1,4 @@
-use bevy_math::{Vec3, Vec3A};
+use bevy_math::{Vec3, Vec3A, };
 use bevy_reflect::Reflect;
 
 pub use rays::*;
@@ -66,7 +66,7 @@ impl IntersectionData {
 /// the `Ray3d` direction is normalized, because it can only be instantiated with the constructor.
 pub mod rays {
     use super::Primitive3d;
-    use bevy_math::{prelude::*, Vec3A};
+    use bevy_math::{prelude::*, Vec3A, Ray3d as BevyRay};
     use bevy_reflect::Reflect;
     use bevy_render::{camera::Camera, primitives::Aabb};
     use bevy_transform::components::GlobalTransform;
@@ -248,9 +248,9 @@ pub mod rays {
         }
     }
 
-    impl From<Ray> for Ray3d {
-        fn from(ray: Ray) -> Self {
-            Ray3d::new(ray.origin, ray.direction)
+    impl From<BevyRay> for Ray3d {
+        fn from(ray: BevyRay) -> Self {
+            Ray3d::new(ray.origin, *ray.direction)
         }
     }
 }
